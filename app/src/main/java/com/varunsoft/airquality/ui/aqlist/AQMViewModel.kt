@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.varunsoft.airquality.data.model.CityAqiItem
 import com.varunsoft.airquality.data.repository.AQIDataRepository
 import com.varunsoft.airquality.utils.Utils
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class AQMViewModel : ViewModel() {
+@HiltViewModel
+class AQMViewModel @Inject constructor(val aqiDataRepository: AQIDataRepository) : ViewModel() {
 
     var aqiLiveData = MutableLiveData<Double>()
     var aqiDataList = MutableLiveData<MutableList<CityAqiItem>>()
@@ -19,7 +22,7 @@ class AQMViewModel : ViewModel() {
     var cityName: String = ""
     var last: Long = System.currentTimeMillis()
     var hashMap: MutableMap<String,ArrayList<Pair<Double,Date>>> = LinkedHashMap()
-    var aqiDataRepository = AQIDataRepository()
+
 
     @SuppressLint("CheckResult")
     fun callNetwork(){

@@ -13,21 +13,10 @@ import io.reactivex.Flowable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
-class AQIDataRepository {
+class AQIDataRepository (var scarletService: WebSocketClient) {
 
     fun callNetwork():Flowable<List<CityAqiItem>> {
 
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build()
-
-        val scarletInstance = Scarlet.Builder()
-            .webSocketFactory(okHttpClient.newWebSocketFactory("wss://city-ws.herokuapp.com/"))
-            .addMessageAdapterFactory(GsonMessageAdapter.Factory())
-            .addStreamAdapterFactory(RxJava2StreamAdapterFactory())
-            .build()
-
-        val scarletService = scarletInstance.create<WebSocketClient>()
         val subscribe = scarletService.observeWebSocketEvent()
             .filter {
                 it is WebSocket.Event.OnConnectionOpened<*>

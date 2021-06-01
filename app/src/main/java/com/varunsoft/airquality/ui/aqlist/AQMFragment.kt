@@ -11,7 +11,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.varunsoft.airquality.R
 import com.varunsoft.airquality.databinding.AQMFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AQMFragment : Fragment() {
 
     lateinit var binding: AQMFragmentBinding

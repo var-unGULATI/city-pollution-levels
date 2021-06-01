@@ -6,7 +6,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.varunsoft.airquality.R
 import com.varunsoft.airquality.ui.aqgraph.RealtimeLineChartFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity((R.layout.activity_main)), AQMFragment.ChangeFragment{
 
     override fun onCreate(savedInstanceState: Bundle?) {
